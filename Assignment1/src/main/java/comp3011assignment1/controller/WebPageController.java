@@ -1,4 +1,4 @@
-package comp3011assignment1;
+package comp3011assignment1.controller;
 
 import java.util.Map;
 
