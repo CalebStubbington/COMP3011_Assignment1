@@ -4,27 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>My Spring Boot Website</title>
+    <title>Assignment 1: Java Web Project</title>
 
     <link rel="stylesheet" href="/style.css">
 </head>
 
 <body>
     <main class="card">
-        <span class="badge">Spring Boot</span>
+        <span class="badge">Assignment 1: Java Web Project</span>
 
-        <h1>My Basic Website</h1>
+        <h1>Voice-To-Text</h1>
 
-        <p>
-            This page is running locally from a Spring Boot application.
-        </p>
+        <p>Press the button and begin recording your voice.</p>
+		
+		<p id="status">Ready to record</p>
 
-        <button id="apiButton" type="button">
-            Test the backend
-        </button>
+        <button id="startButton" type="button">Start Recording</button>
+		
+		<button id="stopButton" type="button" disabled>Stop Recording</button>
 
         <p id="result" class="result">
-            Click the button to call the REST API.
+            Your transcription will appear here.
         </p>
     </main>
 
