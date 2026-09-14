@@ -5,11 +5,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
 
 import comp3011assignment1.service.UptimeService;
 import comp3011assignment1.service.ShutdownService;
 import comp3011assignment1.dto.UptimeResponse;
-import comp3011assignment1.dto.ShutdownResponse;
 
 @RestController
 @RequestMapping("/api/v1/admin")
@@ -29,7 +29,7 @@ public class AdminController {
 	}
 	
 	@PostMapping(value = "/shutdown", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ShutdownResponse ShutdownServer() {
+	public ResponseEntity<?> ShutdownServer() {
 		return shutdownService.shutdown();
 	}
 
