@@ -9,24 +9,18 @@ import comp3011assignment1.service.UptimeService;
 import comp3011assignment1.dto.UptimeResponse;
 
 @RestController
-@RequestMapping("/api/v1/admin")
-public class AdminController {
+@RequestMapping("/api/v1/global")
+public class GlobalController {
 	
 	private final UptimeService uptimeService;
-	private final ShutdownService shutdownService;
 	
-	public AdminController(UptimeService uptimeService) {
+	public GlobalController(UptimeService uptimeService) {
 		this.uptimeService = uptimeService;
 	}
 	
-	@GetMapping(value = "/uptime", produces = MediaType.APPLICATION_JSON_VALUE)
-	public UptimeResponse getServerUptime() {
-		return uptimeService.getUptime();
-	}
-	
-	@PostMapping(value = "/shutdown")
-	public ShutdownResponse ShutdownServer() {
-		return 
+	@GetMapping(value = "/stats")
+	public GlobalStatResponse getGlobalStats() {
+
 	}
 
 }
