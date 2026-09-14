@@ -18,9 +18,4 @@ public class GlobalController {
 		this.uptimeService = uptimeService;
 	}
 	
-	@GetMapping(value = "/stats")
-	public GlobalStatResponse getGlobalStats() {
-
-	}
-
 }

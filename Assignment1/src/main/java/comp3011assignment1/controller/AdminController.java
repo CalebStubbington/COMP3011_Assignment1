@@ -2,11 +2,14 @@ package comp3011assignment1.controller;
 
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import comp3011assignment1.service.UptimeService;
+import comp3011assignment1.service.ShutdownService;
 import comp3011assignment1.dto.UptimeResponse;
+import comp3011assignment1.dto.ShutdownResponse;
 
 @RestController
 @RequestMapping("/api/v1/admin")
@@ -15,8 +18,9 @@ public class AdminController {
 	private final UptimeService uptimeService;
 	private final ShutdownService shutdownService;
 	
-	public AdminController(UptimeService uptimeService) {
+	public AdminController(UptimeService uptimeService, ShutdownService shutdownService) {
 		this.uptimeService = uptimeService;
+		this.shutdownService = shutdownService;
 	}
 	
 	@GetMapping(value = "/uptime", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -24,9 +28,9 @@ public class AdminController {
 		return uptimeService.getUptime();
 	}
 	
-	@PostMapping(value = "/shutdown")
+	@PostMapping(value = "/shutdown", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ShutdownResponse ShutdownServer() {
-		return 
+		return shutdownService.shutdown();
 	}
 
 }
