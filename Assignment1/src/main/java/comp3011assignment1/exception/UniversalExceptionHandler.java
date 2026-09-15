@@ -23,7 +23,7 @@ public class UniversalExceptionHandler {
 				Instant.now(), 
 				500,
 				"Internal Server Error",
-				"An unexpected server error occured.",
+				"An unexpected server error occurred.",
 				path
 			);
 		
