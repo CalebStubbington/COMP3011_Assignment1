@@ -64,7 +64,7 @@ async function uploadRecording() {
 		
 		const data = await response.json();
 		
-		result.textContent = data.text;
+		result.textContent = data.transcription;
 		statusText.textContent = "Transcribe complete";
 	} catch (error) {
 		result.textContent = "The recording could not be transcribed."

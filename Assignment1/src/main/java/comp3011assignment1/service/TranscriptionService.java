@@ -1,11 +1,13 @@
 package comp3011assignment1.service;
 
 import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 
 import org.springframework.stereotype.Service;
 
 import com.openai.client.OpenAIClient;
 import com.openai.client.okhttp.OpenAIOkHttpClient;
+import com.openai.core.MultipartField;
 import com.openai.models.audio.AudioModel;
 import com.openai.models.audio.transcriptions.TranscriptionCreateParams;
 import com.openai.models.audio.transcriptions.TranscriptionCreateResponse;
@@ -21,7 +23,10 @@ public class TranscriptionService {
 		
 		TranscriptionCreateParams params =
 				TranscriptionCreateParams.builder()
-				.file(new ByteArrayInputStream(audioData))
+				.file(MultipartField.<InputStream>builder()
+						.value(new ByteArrayInputStream(audioData))
+						.filename("recording.webm")
+						.build())
 				.model(AudioModel.GPT_4O_MINI_TRANSCRIBE)
 				.build();
 		
