@@ -30,9 +30,7 @@ public class TranscriptionService {
 				.transcriptions()
 				.create(params);
 		
-		TranscriptionResponse response = new TranscriptionResponse (transcription.toString());
-		
-		return response;
+		return new TranscriptionResponse(transcription.asTranscription().text());
 		
 		
 	}

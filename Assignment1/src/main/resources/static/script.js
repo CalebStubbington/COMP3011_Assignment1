@@ -59,7 +59,7 @@ async function uploadRecording() {
 		const response = await fetch("/api/v1/transcription", {method: "POST", body: formData});
 		
 		if (!response.ok){
-			throw new Error(`Request failed: ${reponse.status}`);
+			throw new Error(`Request failed: ${response.status}`);
 		}
 		
 		const data = await response.json();
