@@ -15,14 +15,15 @@ import com.openai.models.audio.transcriptions.TranscriptionCreateResponse;
 import comp3011assignment1.dto.TranscriptionResponse;
 
 @Service
-public class TranscriptionService {
+public class TranscriptionService implements STTService {
 	
 	private final GlobalStatsService globalStatsService;
 	
 	public TranscriptionService(GlobalStatsService globalStatsService) {
 		this.globalStatsService = globalStatsService;
 	}
-
+	
+	@Override
 	public TranscriptionResponse transcribe(byte[] audioData) {
 		
 		OpenAIClient client = OpenAIOkHttpClient.fromEnv();
