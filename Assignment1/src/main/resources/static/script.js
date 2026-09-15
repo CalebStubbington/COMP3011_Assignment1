@@ -49,7 +49,7 @@ function stopRecording() {
 }
 
 async function uploadRecording() {
-	const audioBlob = new Blob(audioChunks, {type: mediaRecorder.mimetype || "audio/webm"});
+	const audioBlob = new Blob(audioChunks, {type: mediaRecorder.mimeType || "audio/webm"});
 	
 	const formData = new FormData();
 	
@@ -59,7 +59,7 @@ async function uploadRecording() {
 		const response = await fetch("/api/v1/transcription", {method: "POST", body: formData});
 		
 		if (!response.ok){
-			throw new Error('Request failed: $(reponse.status)');
+			throw new Error(`Request failed: ${reponse.status}`);
 		}
 		
 		const data = await response.json();
