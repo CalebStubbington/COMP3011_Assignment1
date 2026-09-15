@@ -5,17 +5,22 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import comp3011assignment1.service.UptimeService;
-import comp3011assignment1.dto.UptimeResponse;
+import comp3011assignment1.service.GlobalStatsService;
+import comp3011assignment1.dto.GlobalStatsResponse;
 
 @RestController
 @RequestMapping("/api/v1/global")
 public class GlobalController {
 	
-	private final UptimeService uptimeService;
+	private final GlobalStatsService globalStatsService;
 	
-	public GlobalController(UptimeService uptimeService) {
-		this.uptimeService = uptimeService;
+	public GlobalController(GlobalStatsService globalStatsService) {
+		this.globalStatsService = globalStatsService;
+	}
+	
+	@GetMapping("/stats")
+	public GlobalStatsResponse getGlobalStats() {
+		return globalStatsService.getGlobalStats();
 	}
 	
 }
