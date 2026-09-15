@@ -16,6 +16,12 @@ import comp3011assignment1.dto.TranscriptionResponse;
 
 @Service
 public class TranscriptionService {
+	
+	private final GlobalStatsService globalStatsService;
+	
+	public TranscriptionService(GlobalStatsService globalStatsService) {
+		this.globalStatsService = globalStatsService;
+	}
 
 	public TranscriptionResponse transcribe(byte[] audioData) {
 		
@@ -35,7 +41,16 @@ public class TranscriptionService {
 				.transcriptions()
 				.create(params);
 		
-		return new TranscriptionResponse(transcription.asTranscription().text());
+		var result = transcription.asTranscription();
+		
+		var usage = result.usage();
+		
+		globalStatsService.addUsage(
+				usage.get().asTokens()._inputTokens().asKnown().get(), 
+				usage.get().asTokens()._outputTokens().asKnown().get()
+			);
+		
+		return new TranscriptionResponse(result.text());
 		
 		
 	}
