@@ -6,6 +6,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.time.Instant;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
@@ -43,14 +45,14 @@ public class TranscriptionControllerTest {
 					.value("Hello, I am Caleb this is a Test!"));
 	}
 	
-//	@Test
-//	void getGlobalStatsReturnsAfterTokensUpdated() throws Exception {
-//		when(globalStatsService.getInputTokens()).thenReturn(expectedValueTest2);
-//		when(globalStatsService.getOutputTokens()).thenReturn(expectedValueTest2);
-//		
-//		mockMvc.perform(get("/api/v1/global/stats"))
-//			.andExpect(status().isOk())
-//			.andExpect(jsonPath("$.inputTokens").value(100))
-//			.andExpect(jsonPath("$.outputTokens").value(100));
-//	}
+	@Test
+	void transcriptionFailsWithoutFile() throws Exception {
+
+		mockMvc.perform(multipart("/api/v1/transcription"))
+		.andExpect(jsonPath("$.status").value(500))
+		.andExpect(jsonPath("$.error").value("Internal Server Error"))
+		.andExpect(jsonPath("$.message").value("An unexpected server error occurred."))
+		.andExpect(jsonPath("$.path").value("/api/v1/transcription"));
+	}
+	
 }
