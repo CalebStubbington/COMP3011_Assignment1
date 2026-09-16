@@ -20,6 +20,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import comp3011assignment1.dto.UptimeResponse;
 import comp3011assignment1.service.UptimeService;
+import comp3011assignment1.dto.ErrorResponse;
 import comp3011assignment1.dto.ShutdownResponse;
 import comp3011assignment1.service.ShutdownService;
 
@@ -70,6 +71,20 @@ public class AdminControllerTest {
 	@Test
 	void shutdownServerReturnsConflict() throws Exception {
 		
+		doReturn(ResponseEntity.status(HttpStatus.CONFLICT)
+				.body(new ErrorResponse(Instant.parse("2026-09-16T00:00:00Z"),
+						409,
+						"Conflict",
+						"Graceful shutdown is already in progress.",
+						"/api/v1/admin/shutdown"))
+				).when(shutdownService).shutdown();
+		
+		mockMvc.perform(post("/api/v1/admin/shutdown"))
+		.andExpect(status().isConflict())
+		.andExpect(jsonPath("$.status").value(409))
+		.andExpect(jsonPath("$.error").value("Conflict"))
+		.andExpect(jsonPath("$.message").value("Graceful shutdown is already in progress."))
+		.andExpect(jsonPath("$.path").value("/api/v1/admin/shutdown"));
 	}
 
 
