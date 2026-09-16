@@ -17,12 +17,12 @@ public class GlobalStatsService {
 		outputTokens.addAndGet(output);
 	}
 	
-	public AtomicLong getInputTokens() {
-		return inputTokens;
+	public long getInputTokens() {
+		return inputTokens.get();
 	}
 	
-	public AtomicLong getOutputTokens() {
-		return outputTokens;
+	public long getOutputTokens() {
+		return outputTokens.get();
 	}
 	
 	public GlobalStatsResponse getGlobalStats() {

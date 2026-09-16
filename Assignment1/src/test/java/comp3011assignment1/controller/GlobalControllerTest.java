@@ -5,18 +5,17 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import java.util.concurrent.atomic.AtomicLong;
-
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
+import comp3011assignment1.dto.GlobalStatsResponse;
 import comp3011assignment1.service.GlobalStatsService;
 
 @WebMvcTest(GlobalController.class)
-public class GlobalStatsControllerTest {
+public class GlobalControllerTest {
 	
 	@Autowired
 	private MockMvc mockMvc;
@@ -24,13 +23,9 @@ public class GlobalStatsControllerTest {
 	@MockitoBean
 	private GlobalStatsService globalStatsService;
 	
-	AtomicLong expectedValueTest1 = new AtomicLong(0L);
-	AtomicLong expectedValueTest2 = new AtomicLong(100L);
-	
 	@Test
 	void getGlobalStatsReturnsZeroFirstTime() throws Exception {
-		when(globalStatsService.getInputTokens()).thenReturn(expectedValueTest1);
-		when(globalStatsService.getOutputTokens()).thenReturn(expectedValueTest1);
+		when(globalStatsService.getGlobalStats()).thenReturn(new GlobalStatsResponse(0L, 0L));
 		
 		mockMvc.perform(get("/api/v1/global/stats"))
 			.andExpect(status().isOk())
@@ -40,13 +35,12 @@ public class GlobalStatsControllerTest {
 	
 	@Test
 	void getGlobalStatsReturnsAfterTokensUpdated() throws Exception {
-		when(globalStatsService.getInputTokens()).thenReturn(expectedValueTest2);
-		when(globalStatsService.getOutputTokens()).thenReturn(expectedValueTest2);
+		when(globalStatsService.getGlobalStats()).thenReturn(new GlobalStatsResponse(100L, 200L));
 		
 		mockMvc.perform(get("/api/v1/global/stats"))
 			.andExpect(status().isOk())
 			.andExpect(jsonPath("$.inputTokens").value(100))
-			.andExpect(jsonPath("$.outputTokens").value(100));
+			.andExpect(jsonPath("$.outputTokens").value(200));
 	}
 
 }
