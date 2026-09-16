@@ -12,8 +12,22 @@ import org.junit.jupiter.api.Test;
 
 import comp3011assignment1.service.GlobalStatsService;
 
+/**
+ * Mutliple threads update the global stats at the same time to simulate
+ * concurrent transcriptions requests.
+ * 
+ * The final totals are checked to verify that no updates are lost when requests
+ * are processed concurrently.
+ * 
+ * This test was developed to show evidence of thread-safety 
+ */
+
 public class GlobalStatsRaceConditionTest {
 
+	/**
+	 * Verifies that 250 concurrent token updates are all recorded
+	 * correctly and that none are lost due to race conditions.
+	 */
 	@Test
 	void GlobalStatsWorkWithConcurrentUpdates() throws Exception {
 		

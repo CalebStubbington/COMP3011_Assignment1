@@ -12,8 +12,17 @@ import org.springframework.web.context.request.WebRequest;
 
 import comp3011assignment1.dto.ErrorResponse;
 
+/**
+ * Global exception handler for API requests.
+ * 
+ * Converts unexpected exceptions into a consistent error response.
+ * Used instead of the default error page.
+ */
+
 @RestControllerAdvice
 public class UniversalExceptionHandler {
+	
+	
 	
 	@ExceptionHandler(Exception.class)
 	public ResponseEntity<ErrorResponse> handlerException(Exception exception, WebRequest request) {

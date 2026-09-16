@@ -8,6 +8,13 @@ import org.springframework.stereotype.Service;
 
 import comp3011assignment1.dto.UptimeResponse;
 
+/**
+ * Service used to track the servers start time and uptime.
+ * 
+ * A clock is injected so that we can used a controlled timestamp
+ * rather than system time.
+ */
+
 @Service
 public class UptimeService {
 	

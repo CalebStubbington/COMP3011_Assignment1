@@ -2,6 +2,10 @@ package comp3011assignment1.service;
 
 import comp3011assignment1.dto.TranscriptionResponse;
 
+/**
+ * Stub Service for testing a mock STT service
+ */
+
 public class StubSTTService implements STTService {
 	
 	@Override

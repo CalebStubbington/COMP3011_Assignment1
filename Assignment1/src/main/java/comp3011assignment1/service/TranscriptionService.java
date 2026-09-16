@@ -14,6 +14,13 @@ import com.openai.models.audio.transcriptions.TranscriptionCreateResponse;
 
 import comp3011assignment1.dto.TranscriptionResponse;
 
+/**
+ * Service for communicating with the external cloud STT API
+ * 
+ * The API is created when the transcription is request so that the 
+ * application can start without requiring the OPENAI key.
+ */
+
 @Service
 public class TranscriptionService implements STTService {
 	

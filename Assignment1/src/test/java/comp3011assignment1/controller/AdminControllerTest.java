@@ -24,6 +24,15 @@ import comp3011assignment1.dto.ErrorResponse;
 import comp3011assignment1.dto.ShutdownResponse;
 import comp3011assignment1.service.ShutdownService;
 
+/**
+ * Regression tests for the admin API endpoints.
+ * 
+ * These tests verify that the uptime and shutdown endpoints return
+ * the expected HTTP statues and responses.
+ * 
+ * The services are mocked to test the controller independently.
+ */
+
 @WebMvcTest(AdminController.class)
 public class AdminControllerTest {
 	
@@ -38,6 +47,11 @@ public class AdminControllerTest {
 	
 	@MockitoBean
 	private ConfigurableApplicationContext context;
+	
+	/**
+	 * Verifies that the uptime endpoint returns the server start time,
+	 * current time and calculated uptime.
+	 */
 	
 	@Test
 	void uptimeReturnsCorrectUptime() throws Exception {
@@ -54,6 +68,11 @@ public class AdminControllerTest {
 			.andExpect(jsonPath("$.serverUptimeSeconds").value(90.0));
 	}
 	
+	/**
+	 * Verifies that a valid shutdown request is returns 202
+	 * and the expected shutdown message.
+	 */
+	
 	@Test
 	void shutdownServerReturnsAccepted() throws Exception {
 		
@@ -67,6 +86,11 @@ public class AdminControllerTest {
 			.andExpect(jsonPath("$.message").value("Graceful shutdown requested."));
 		
 	}
+	
+	/**
+	 * Verifies that a valid shutdown request returns 409
+	 * and the shutdown conflict message.
+	 */
 	
 	@Test
 	void shutdownServerReturnsConflict() throws Exception {

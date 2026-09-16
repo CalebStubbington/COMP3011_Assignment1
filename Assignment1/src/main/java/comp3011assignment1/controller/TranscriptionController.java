@@ -10,6 +10,14 @@ import org.springframework.web.multipart.MultipartFile;
 import comp3011assignment1.service.TranscriptionService;
 import comp3011assignment1.dto.TranscriptionResponse;
 
+/**
+ * REST controller responsible for receiving the uploaded audio files and passing it to 
+ * the transcription service for processing.
+ * 
+ * The controller provides the API endpoint used to POST the audio
+ * for the speech to text conversion.
+ */
+
 @RestController
 @RequestMapping("/api/v1")
 public class TranscriptionController {

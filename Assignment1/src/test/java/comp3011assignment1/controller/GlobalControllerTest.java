@@ -14,6 +14,15 @@ import org.springframework.test.web.servlet.MockMvc;
 import comp3011assignment1.dto.GlobalStatsResponse;
 import comp3011assignment1.service.GlobalStatsService;
 
+/**
+ * Regression tests for the global statistic endpoint.
+ * 
+ * These tests verify that the controller returns the correct HTTP
+ * status and JSOn response containing the input and output tokens.
+ * 
+ * GlobalStatService is mocked so the controller can be tested independently.
+ */
+
 @WebMvcTest(GlobalController.class)
 public class GlobalControllerTest {
 	
@@ -22,6 +31,11 @@ public class GlobalControllerTest {
 	
 	@MockitoBean
 	private GlobalStatsService globalStatsService;
+	
+	/**
+	 * Verifies that the global stats endpoint correctly returns
+	 * zero token usage when no requests have been made. 
+	 */
 	
 	@Test
 	void getGlobalStatsReturnsZeroFirstTime() throws Exception {
@@ -32,6 +46,11 @@ public class GlobalControllerTest {
 			.andExpect(jsonPath("$.inputTokens").value(0))
 			.andExpect(jsonPath("$.outputTokens").value(0));
 	}
+	
+	/**
+	 * Verifies that the endpoint correctly returns known input and output
+	 * tokens from the stats service.
+	 */
 	
 	@Test
 	void getGlobalStatsReturnsAfterTokensUpdated() throws Exception {

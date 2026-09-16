@@ -11,6 +11,15 @@ import org.springframework.http.ResponseEntity;
 import comp3011assignment1.dto.ShutdownResponse;
 import comp3011assignment1.dto.ErrorResponse;
 
+/**
+ * Service for performing graceful shutdowns
+ * 
+ * An AtomicBoolean is used to prevent multiple shutdown requests
+ * from starting more than one shutdown.
+ * 
+ * Async is used to ensure the request can return a response before the server starts.
+ */
+
 @Service
 public class ShutdownService {
 	

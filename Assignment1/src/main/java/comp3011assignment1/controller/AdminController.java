@@ -11,6 +11,10 @@ import comp3011assignment1.service.UptimeService;
 import comp3011assignment1.service.ShutdownService;
 import comp3011assignment1.dto.UptimeResponse;
 
+/**
+ * REST controller for admin operations such as graceful shutdown and uptime stats.
+ */
+
 @RestController
 @RequestMapping("/api/v1/admin")
 public class AdminController {

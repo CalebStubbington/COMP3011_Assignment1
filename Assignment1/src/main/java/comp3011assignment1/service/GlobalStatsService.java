@@ -6,6 +6,13 @@ import org.springframework.stereotype.Service;
 
 import comp3011assignment1.dto.GlobalStatsResponse;
 
+/**
+ * Service responsible for maintaining the STT input and output usage.
+ * 
+ * AtomicLong is used to ensure updates remain correct when multiple updates
+ * are processed.
+ */
+
 @Service
 public class GlobalStatsService {
 	
